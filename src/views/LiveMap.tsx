@@ -44,6 +44,12 @@ export const LiveMap = () => {
   };
 
   useEffect(() => {
+    const handleTransactionsData = (transactionsData: Transaction[]) => {
+      window.parent.postMessage({
+        type: 'TRANSACTIONS_DATA',
+        data: transactions,
+      }, 'http://localhost:3001');
+    };
     if (transactions && transactions.length > 0) {
       const transactionsPrices = transactions.map(transaction => transaction.priceOfMeter);
       const sum = transactionsPrices.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
@@ -53,12 +59,7 @@ export const LiveMap = () => {
     }
   }, [transactions])
 
-  const handleTransactionsData = (transactionsData: Transaction[]) => {
-    window.parent.postMessage({
-      type: 'TRANSACTIONS_DATA',
-      data: transactions,
-    }, 'http://localhost:3001');
-  };
+  
   const handleBoundsChanged = () => {
     const bounds = mapRef.current?.getBounds();
     if (bounds) {
