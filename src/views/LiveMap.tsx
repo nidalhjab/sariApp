@@ -3,7 +3,7 @@ import { GoogleMap, useLoadScript, Marker, Polygon, InfoWindow } from "@react-go
 import { Transaction, useGetTransactions } from "../common/hooks/useGetTransactions.hook";
 import { ErrorBanner } from "../common/components/ErrorBanner";
 import { LoadingSpinner } from "../common/components/LoadingSpinner";
-import { center, MAP_API_KEY, Saritoken, mapContainerStyle, mapOptions } from "../common/utlis/constants";
+import { center, MAP_API_KEY, Saritoken, mapContainerStyle, mapOptions, PEPSI_API } from "../common/utlis/constants";
 
 interface Poi {
   label: string;
@@ -48,7 +48,7 @@ export const LiveMap = () => {
       window.parent.postMessage({
         type: 'TRANSACTIONS_DATA',
         data: transactions,
-      }, 'http://localhost:3001');
+      }, PEPSI_API);
     };
     if (transactions && transactions.length > 0) {
       const transactionsPrices = transactions.map(transaction => transaction.priceOfMeter);
@@ -69,7 +69,7 @@ export const LiveMap = () => {
 
   const handleMessage = (event: MessageEvent) => {
     const { type, token } = event.data;
-    if (event.origin === 'http://localhost:3001') {
+    if (event.origin === PEPSI_API) {
       //The token must be checked in BE, and should have SSL certificate in the cloud so we can return all the bundle.
       if (type === "TOKEN" && token === Saritoken) {
         setIsAuth(true)
@@ -123,7 +123,7 @@ export const LiveMap = () => {
       window.parent.postMessage({
         type: 'SELECTED_ADDRESS',
         details: addressDetails,
-      }, 'http://localhost:3001');
+      }, PEPSI_API);
 
     } catch (error) {
       setErrorMEssage("Error in geting address details");
