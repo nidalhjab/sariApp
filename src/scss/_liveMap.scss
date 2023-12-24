@@ -1,0 +1,14 @@
+.viewsContainer{
+   
+    .map{
+        position: relative;
+    }
+    .currZoom{
+        position: absolute;
+        top: 2%;
+        left: 40%;
+        background-color: black;
+        color: white;
+        padding: 5px;
+    }
+}
