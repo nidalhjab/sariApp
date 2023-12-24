@@ -17,4 +17,4 @@ export const mapOptions = {
 export const Saritoken = 246;
 
 export const MAP_API_KEY = "AIzaSyBwhe7wmRgpL19gxofhGzn3LD4_OZDgTGw";
-export const PEPSI_API ="https://pepsitask.netlify.app/"
+export const PEPSI_API ="https://pepsitask.netlify.app"
